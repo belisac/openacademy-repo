@@ -90,11 +90,14 @@
                         <field name="name"/>
                         <field name="start_date"/>
                         <field name="duration"/>
+                        <field name="datetime_test"/>
                         <field name="seats"/>
+                        <field name="taken_seats" widget="progressbar"/>
                         <field name="instructor_id"/>
                         <field name="course_id"/>
                         <label for="attendee_ids"/>
                         <field name="attendee_ids" nolabel="1"/>
+                        <field name="active"/>
                     </group>
                 </sheet>
             </form>
@@ -112,6 +115,7 @@
                 <field name="start_date"/>
                 <field name="duration"/>
                 <field name="seats"/>
+                 <field name="taken_seats" widget="progressbar"/>
                 <field name="instructor_id"/>
                 <field name="course_id"/>
             </tree>
