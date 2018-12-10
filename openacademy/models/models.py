@@ -17,13 +17,14 @@ class Course(models.Model):
     name = fields.Char(string="Title", required=True)
     description = fields.Text()
     responsible_id = fields.Many2one('res.users', string="Responsible",
-                     index=True, ondelete='set null', default=get_uid)
+            index=True, ondelete='set null', default=get_uid)
 # default=lambda self, *a: self.env.uid)
     session_ids = fields.One2many('openacademy.session', 'course_id')
 
     _sql_constraints = [('name_description_check',
                          'CHECK( name != description )',
-                         "The title of the course should not be the description"),
+                         "The title of the course should "
+                         "not be the description"),
                          ('name_unique','UNIQUE(name)',
                          "The course title must be unique", ),
                          ]
@@ -107,13 +108,14 @@ class Session(models.Model):
                     'warning':
                     {
                         'title': _("Incorrect 'seats' value"),
-                        'message': _("The number of available seats may not be negative"),
+                        'message': _("The number of available seats"
+                            " may not be negative"),
                     }
                     }
         if self.seats < len(self.attendee_ids):
             self.active = False
             return {
-                    'warning':{
+                    'warning': {
                         'title': _("Too many attendees"),
                         'message': _(
                             "Increase seats or remove excess attendees"),
