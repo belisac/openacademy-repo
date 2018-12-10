@@ -31,15 +31,14 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
 # Mute the error odoo.sql.db to avoid it in log
 # Test create a course with same name and description
 # To raise constraint of name different to description
- # Error raised expected with message expected-
+# Error raised expected with message expected-
     @mute_logger('odoo.sql_db')
     def test_10_same_name_and_description(self):
          with self.assertRaisesRegexp(
                  IntegrityError,
                  'new row for relation "openacademy_course" violates'
-                ' check constraint "openacademy_course_name_description_check"'
-                ):
-# Create a course with some name and description to raise error.
+                 ' check constraint "openacademy_course_name_description_check"'
+                 ):
             self.create_course('test', 'test', None)
 
     @mute_logger('odoo.sql_db')

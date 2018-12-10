@@ -25,9 +25,8 @@ class Course(models.Model):
                          'CHECK( name != description )',
                          "The title of the course should "
                          "not be the description"),
-                         ('name_unique','UNIQUE(name)',
-                         "The course title must be unique", ),
-                         ]
+                         ('name_unique', 'UNIQUE(name)',
+                         "The course title must be unique", ),]
 
     def copy(self, default=None):
         if default is None:
