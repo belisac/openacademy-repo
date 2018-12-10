@@ -12,7 +12,7 @@ addons:
 
 env:
   global:
-  - VERSION="10.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
+  - VERSION="11.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
   - PHANTOMJS_VERSION="latest"
   - WEBSITE_REPO="1"
 
@@ -31,4 +31,3 @@ script:
 
 after_success:
   - travis_after_tests_success
-
