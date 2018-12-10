@@ -5,35 +5,36 @@ from psycopg2 import IntegrityError
 from openerp.tests.common import TransactionCase
 from openerp.tools import mute_logger
 
-class GlobalTestOpenAcademyCourse(TransactionCase):
-#Global test to openacademy course model
-#Test create course and trigger constraints.
 
-   # Method seudo-constructor of test setUp
+class GlobalTestOpenAcademyCourse(TransactionCase):
+# Global test to openacademy course model
+# Test create course and trigger constraints.
+
+# Method seudo-constructor of test setUp
     def setUp(self):
-        #Define global variables to tests methods
+# Define global variables to tests methods
         super(GlobalTestOpenAcademyCourse, self).setUp()
         self.course = self.env['openacademy.course']
+# Method of class that don't is test -
 
-    # Method of class that don't is test -
-
-    def create_course(self, course_name, course_description, course_responsible_id):
-        # Create a course with parameters received.
+    def create_course(self, course_name, course_description,
+            course_responsible_id):
+# Create a course with parameters received.
         course_id = self.course.create({
-        'name': course_name,
-        'description': course_description,
-        'responsible_id': course_responsible_id,
-        })
+            'name': course_name,
+            'description': course_description,
+            'responsible_id': course_responsible_id,
+            })
         return course_id
 
-    # Method of test startswith 'def test_*(self):'
+# Method of test startswith 'def test_*(self):'
 
-    # Mute the error odoo.sql.db to avoid it in log
+# Mute the error odoo.sql.db to avoid it in log
     @mute_logger('odoo.sql_db')
     def test_10_same_name_and_description(self):
-         # Test create a course with same name and description
-         # To raise constraint of name different to description
-         # Error raised expected with message expected-
+# Test create a course with same name and description
+# To raise constraint of name different to description
+# Error raised expected with message expected-
          with self.assertRaisesRegexp(
                  IntegrityError,
                  'new row for relation "openacademy_course" violates'
@@ -50,13 +51,12 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
         '''
 
         new_id = self.create_course('test1', 'test_description', None)
-        print ("new_id", new_id)
+        print("new_id", new_id)
         with self.assertRaisesRegexp(
                 IntegrityError,
-                'duplicate key value violates unique constraint "openacademy_course_name_unique"'
-            ):
+                'duplicate key value violates unique constraint "openacademy_course_name_unique"'):
             new_id2 = self.create_course('test1', 'test_description', None)
-            print ("new_id2", new_id2)
+            print("new_id2", new_id2)
 
     def test_15_duplicate_course(self):
         '''
@@ -64,4 +64,4 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
         '''
         course = self.env.ref('openacademy.course0')
         course_id = course.copy()
-        print ("course_id", course_id)
+        print:("course_id", course_id)
