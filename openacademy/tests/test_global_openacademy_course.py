@@ -5,6 +5,7 @@ from psycopg2 import IntegrityError
 from openerp.tests.common import TransactionCase
 from openerp.tools import mute_logger
 
+
 # Global test to openacademy course model
 # Test create course and trigger constraints.
 # Method seudo-constructor of test setUp

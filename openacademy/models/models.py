@@ -26,8 +26,8 @@ class Course(models.Model):
                          'CHECK( name != description )',
                          "The title of the course should "
                          "not be the description"),
-                         ('name_unique', 'UNIQUE(name)',
-                          "The course title must be unique", ), ]
+                        ('name_unique', 'UNIQUE(name)',
+                         "The course title must be unique", ), ]
 
     def copy(self, default=None):
         if default is None:
@@ -54,10 +54,10 @@ class Session(models.Model):
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
     instructor_id = fields.Many2one('res.partner', string='Instructor',
-                                    domain= ['|', ('instructor', '=', True),
-                                    ('category_id.name', 'ilike', 'Teacher')])
+                                    domain=['|', ('instructor', '=', True),
+                                   ('category_id.name', 'ilike', 'Teacher')])
     course_id = fields.Many2one('openacademy.course',
-                                ondelete='cascade',string="Course",
+                                ondelete='cascade', string="Course",
                                 required=True)
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(compute='_taken_seats', store=True)
@@ -115,10 +115,10 @@ class Session(models.Model):
             self.active = False
             return {
                     'warning': {'title': _("Too many attendees"),
-                                'message': _(
-                                "Increase seats or remove excess attendees"),
-                                }
-                        }
+                        'message': _("Increase "
+                                     "seats or remove "
+                                     "excess attendees"),}
+                    }
         self.active = True
 
     @api.constrains('instructor_id', 'attendee_ids')
