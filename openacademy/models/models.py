@@ -33,7 +33,7 @@ class Course(models.Model):
         if default is None:
             default = {}
         copied_count = self.search_count([('name', 'ilike', _('Copy of %s%%')
-                                           % (self.name))])|
+                                         % (self.name))])
         if not copied_count:
             new_name = _("Copy of %s") % (self.name)
         else:
