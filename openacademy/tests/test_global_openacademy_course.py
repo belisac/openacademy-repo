@@ -11,7 +11,6 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
 # Test create course and trigger constraints.
 # Method seudo-constructor of test setUp
 # Define global variables to tests methods
-
     def setUp(self):
         super(GlobalTestOpenAcademyCourse, self).setUp()
         self.course = self.env['openacademy.course']
@@ -35,11 +34,9 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
     @mute_logger('odoo.sql_db')
     def test_10_same_name_and_description(self):
         with self.assertRaisesRegexp(
-                 IntegrityError,
-                 'new row for relation "openacademy_course" violates'
-                 ' check constraint '
-                 '"openacademy_course_name_description_check"'
-                 ):
+                IntegrityError, 'new row for relation "openacademy_course" '
+                'violates check constraint "openacademy_course'
+                '_name_description_check"'):
             self.create_course('test', 'test', None)
 
     @mute_logger('odoo.sql_db')
