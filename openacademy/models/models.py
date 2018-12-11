@@ -55,8 +55,8 @@ class Session(models.Model):
     seats = fields.Integer(string="Number of seats")
     instructor_id = fields.Many2one('res.partner', string='Instructor',
                                     domain=['|', ('instructor', '=', True),
-                                    ('category_id.name',
-                                    'ilike', 'Teacher')])
+                                                 ('category_id.name',
+                                                  'ilike', 'Teacher')])
     course_id = fields.Many2one('openacademy.course',
                                 ondelete='cascade', string="Course",
                                 required=True)
@@ -112,11 +112,10 @@ class Session(models.Model):
                     }
         if self.seats < len(self.attendee_ids):
             self.active = False
-            return {'warning': {
-                            'title': _("Too many attendees"),
-                            'message': _("Increase "
-                                         "seats or remove "
-                                         "excess attendees"), }
+            return {'warning': {'title': _("Too many attendees"),
+                                'message': _("Increase "
+                                             "seats or remove "
+                                             "excess attendees"), }
                     }
         self.active = True
 
