@@ -5,12 +5,11 @@ from psycopg2 import IntegrityError
 from openerp.tests.common import TransactionCase
 from openerp.tools import mute_logger
 
-
-class GlobalTestOpenAcademyCourse(TransactionCase):
 # Global test to openacademy course model
 # Test create course and trigger constraints.
 # Method seudo-constructor of test setUp
 # Define global variables to tests methods
+class GlobalTestOpenAcademyCourse(TransactionCase):
     def setUp(self):
         super(GlobalTestOpenAcademyCourse, self).setUp()
         self.course = self.env['openacademy.course']
