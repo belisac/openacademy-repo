@@ -9,17 +9,17 @@ from openerp.tools import mute_logger
 class GlobalTestOpenAcademyCourse(TransactionCase):
 # Global test to openacademy course model
 # Test create course and trigger constraints.
-
 # Method seudo-constructor of test setUp
 # Define global variables to tests methods
+
     def setUp(self):
         super(GlobalTestOpenAcademyCourse, self).setUp()
         self.course = self.env['openacademy.course']
 # Method of class that don't is test -
 # Create a course with parameters received.
 
-    def create_course(self, course_name, course_description,
-            course_responsible_id):
+    def create_course(self, course_name,
+                      course_description, course_responsible_id):
         course_id = self.course.create({
             'name': course_name,
             'description': course_description,
@@ -34,10 +34,11 @@ class GlobalTestOpenAcademyCourse(TransactionCase):
 # Error raised expected with message expected-
     @mute_logger('odoo.sql_db')
     def test_10_same_name_and_description(self):
-         with self.assertRaisesRegexp(
+        with self.assertRaisesRegexp(
                  IntegrityError,
                  'new row for relation "openacademy_course" violates'
-                 ' check constraint "openacademy_course_name_description_check"'
+                 ' check constraint '
+                 '"openacademy_course_name_description_check"'
                  ):
             self.create_course('test', 'test', None)
 
